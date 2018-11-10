@@ -8,12 +8,11 @@ import javax.ws.rs.core.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.kafka.producer.ExampleProducer;
-import org.example.kafka.producer.ExampleProducerConfig;
 
 @Path("/message")
 public class MessageRestService {
-	
-    private static final Logger log = LogManager.getLogger(MessageRestService.class);
+
+	private static final Logger log = LogManager.getLogger(MessageRestService.class);
 
 	private ExampleProducer producer = new ExampleProducer();
 
@@ -22,7 +21,7 @@ public class MessageRestService {
 	public Response printMessage(@PathParam("param") String msg) {
 
 		String result = "Restful example : " + msg;
-		
+
 		try {
 			producer.sendMessage(msg);
 		} catch (InterruptedException e) {
