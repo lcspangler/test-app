@@ -20,7 +20,7 @@ public class MessageRestService {
 	@Path("/{param}")
 	public Response printMessage(@PathParam("param") String msg) {
 
-		String result = "Restful example : " + msg;
+		String result = "Message: " + msg;
 
 		try {
 			producer.sendMessage(msg);

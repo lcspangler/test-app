@@ -11,10 +11,10 @@ import org.apache.logging.log4j.Logger;
 
 public class ExampleConsumer {
 	private static final Logger log = LogManager.getLogger(ExampleConsumer.class);
-	ExampleConsumerConfig config;
-	KafkaConsumer consumer;
-	Properties props;
-	boolean commit;
+	private ExampleConsumerConfig config;
+	private KafkaConsumer consumer;
+	private Properties props;
+	private boolean commit;
 
 	public ExampleConsumer() {
 		config = ExampleConsumerConfig.fromEnv();
@@ -31,6 +31,7 @@ public class ExampleConsumer {
 			ConsumerRecords<String, String> records = consumer.poll(1000);
 			int i = 0;
 			for (ConsumerRecord<String, String> record : records) {
+				log.info("Message received: {}", record);
 				i++;
 				if (i > 1)
 					recieved += "\t\t\t" + record.value() + "\n";
