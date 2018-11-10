@@ -1,6 +1,7 @@
 package org.example.kafka.consumer;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -23,12 +24,19 @@ public class ExampleConsumer {
 		commit = !Boolean.parseBoolean(config.getEnableAutoCommit());
 	}
 
+	@SuppressWarnings("unchecked")
 	public String consume() {
 		String recieved = "";
-		consumer.subscribe(Collections.singletonList(config.getTopic()));
+		// consumer.subscribe(Collections.singletonList(config.getTopic()));
+		List<String> topics = new ArrayList<String>();
+		topics.add("my-topic");
+		consumer.subscribe(topics);
+
+		log.info("Subscribed to topics: {}", topics);
 
 		while (true) {
 			ConsumerRecords<String, String> records = consumer.poll(1000);
+
 			int i = 0;
 			for (ConsumerRecord<String, String> record : records) {
 				log.info("Message received: {}", record);
