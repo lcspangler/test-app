@@ -8,6 +8,7 @@
   <name>test-app</name>
   <dependencies>
   
+  <!--  RestEasy -->
     <dependency>
 		<groupId>org.jboss.resteasy</groupId>
 		<artifactId>resteasy-jaxrs</artifactId>
@@ -15,25 +16,31 @@
 		<scope>provided</scope>
 	</dependency>
 	
+  <!-- Kafka -->
 	<dependency>
     	<groupId>org.apache.kafka</groupId>
   	  	<artifactId>kafka-clients</artifactId>
   	  	<version>2.0.0</version>
 	</dependency>
-  
   	<dependency>
    		<groupId>org.apache.kafka</groupId>
     	<artifactId>kafka-clients</artifactId>
     	<version>2.0.0</version>
 	</dependency>
-
 	<dependency>
     	<groupId>org.apache.kafka</groupId>
     	<artifactId>kafka-streams</artifactId>
     	<version>2.0.0</version>
 	</dependency>
      
+   <!-- Servlet -->
+	<dependency>
+    	<groupId>javax.servlet</groupId>
+    	<artifactId>javax.servlet-api</artifactId>
+    	<version>4.0.1</version>
+	</dependency>
      
+    <!-- Logging -->
              <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -50,6 +57,7 @@
             <version>1.6.2</version>
         </dependency>
      
+   <!-- Test -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

@@ -7,7 +7,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-	<display-name>Restful Web Application</display-name>
+	<display-name>Test Application</display-name>
 
 	<!-- Auto scan REST service -->
 	<context-param>
@@ -26,6 +26,10 @@
 			org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
 		</listener-class>
 	</listener>
+		
+	<listener>
+   		<listener-class>org.example.servlet.listener.ConsumerServletContextListener</listener-class>
+	</listener>
 	
 	<servlet>
 		<servlet-name>resteasy-servlet</servlet-name>
@@ -38,5 +42,6 @@
 		<servlet-name>resteasy-servlet</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
+
 
 </web-app>
