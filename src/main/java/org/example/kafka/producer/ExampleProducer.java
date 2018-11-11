@@ -9,9 +9,9 @@ import org.apache.logging.log4j.Logger;
 
 public class ExampleProducer {
 	private static final Logger log = LogManager.getLogger(ExampleProducer.class);
-	ExampleProducerConfig config;
-	KafkaProducer producer;
-	Properties props;
+	private ExampleProducerConfig config;
+	private KafkaProducer producer;
+	private Properties props;
 
 	public ExampleProducer() {
 		this.config = ExampleProducerConfig.fromEnv();
