@@ -35,7 +35,9 @@ public class ExampleConsumer {
 		log.info("Subscribed to topics: {}", topics);
 
 		while (true) {
+			log.info("Consuming records");
 			ConsumerRecords<String, String> records = consumer.poll(1000);
+			log.info("Records received: {}", records);
 
 			int i = 0;
 			for (ConsumerRecord<String, String> record : records) {
