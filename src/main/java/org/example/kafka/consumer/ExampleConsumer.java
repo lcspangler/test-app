@@ -7,6 +7,7 @@ import java.util.Properties;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,35 +26,33 @@ public class ExampleConsumer {
 	}
 
 	@SuppressWarnings("unchecked")
-	public String consume() {
-		String recieved = "";
-		// consumer.subscribe(Collections.singletonList(config.getTopic()));
+	public String consume() throws InterruptedException {
 		List<String> topics = new ArrayList<String>();
 		topics.add("my-topic");
 		consumer.subscribe(topics);
 
-		log.info("Subscribed to topics: {}", topics);
+		log.info("Subscribed to topics: {}", consumer.listTopics());
 
 		while (true) {
-			log.info("Consuming records");
+			log.info("Retrieving records");
 			ConsumerRecords<String, String> records = consumer.poll(1000);
-			log.info("Records received: {}", records);
+			consumer.listTopics();
 
-			int i = 0;
-			for (ConsumerRecord<String, String> record : records) {
-				log.info("Message received: {}", record);
-				i++;
-				if (i > 1)
-					recieved += "\t\t\t" + record.value() + "\n";
-				else
-					recieved += record.value() + "\n";
-				log.debug(record.key());
-
-				if (commit) {
-					consumer.commitSync();
-				}
+			if (records.isEmpty()) {
+				log.info("Found no records");
+				continue;
 			}
-			return recieved;
+
+			log.info("Total No. of records received : {}", records.count());
+			for (ConsumerRecord<String, String> record : records) {
+				log.info("Record received partition : {}, key : {}, value : {}, offset : {}", record.partition(),
+						record.key(), record.value(), record.offset());
+			}
+
+			List<TopicPartition> partitions = consumer.partitionsFor("my-topic");
+			for (TopicPartition partition : partitions) {
+				log.info("Now at: {}", consumer.position(partition));
+			}
 		}
 	}
 
