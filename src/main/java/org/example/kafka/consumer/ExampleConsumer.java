@@ -26,7 +26,7 @@ public class ExampleConsumer {
 	}
 
 	@SuppressWarnings("unchecked")
-	public String consume() throws InterruptedException {
+	public String consume() {
 		List<String> topics = new ArrayList<String>();
 		topics.add("my-topic");
 		consumer.subscribe(topics);
